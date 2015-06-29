@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "description": "A starter project for AngularJS",
+  "main": "server.js",
   "repository": "https://github.com/angular/angular-seed",
   "license": "MIT",
   "devDependencies": {
@@ -15,7 +16,12 @@
     "karma-jasmine": "^0.3.5",
     "karma-junit-reporter": "^0.2.2",
     "protractor": "^2.1.0",
-    "shelljs": "^0.2.6"
+    "shelljs": "^0.2.6",
+    "express": "~4.7.2",
+    "mongoose": "~3.6.2",
+    "morgan": "~1.2.2",
+    "body-parser": "~1.5.2",
+    "method-override": "~2.1.2"
   },
   "scripts": {
     "postinstall": "bower install",
@@ -32,5 +38,6 @@
 
     "preprotractor": "npm run update-webdriver",
     "protractor": "protractor e2e-tests/protractor.conf.js"
+
   }
 }
