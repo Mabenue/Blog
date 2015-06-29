@@ -12,7 +12,7 @@ config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/view1'});
 }]).
 controller('LandingCtrl', function($scope){
-  $scope.banner = 'resources/footer_lodyas.png';
+  $scope.banner = 'resources/banner.jpg';
   $scope.textBackground = 'resources/zwartevilt.png';
   $scope.background = 'resources/footer_lodyas.png';
 });
