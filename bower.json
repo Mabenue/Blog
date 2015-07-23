@@ -11,6 +11,24 @@
     "angular-loader": "~1.4.0",
     "angular-mocks": "~1.4.0",
     "html5-boilerplate": "~5.2.0",
-    "bootstrap": "~3.3.5"
+    "bootstrap": "~3.3.5",
+    "jquery": "~2.1.4"
+  },
+  "overrides": {
+    "html5-boilerplate" : {
+      "main": ["dist/css/main.css",
+      "dist/css/normalize.css"]
+    },
+    "bootstrap" : {
+      "main": "dist/css/bootstrap.css"
+    },
+    "ignore": [
+      "**/.*",
+      "bower_components",
+      "test",
+      "tests",
+      "angular-mocks",
+      "html5-boilerplate"
+    ]
   }
 }

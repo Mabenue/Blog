@@ -3,16 +3,16 @@
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
   'ngRoute',
-  'myApp.view1',
+  'myApp.home',
   'myApp.contact',
-  'myApp.about',
-  'myApp.version'
+  'myApp.about'
 ]).
 config(['$routeProvider', function($routeProvider) {
-  $routeProvider.otherwise({redirectTo: '/view1'});
+  $routeProvider.otherwise({redirectTo: '/home'});
 }]).
-controller('LandingCtrl', function($scope){
-  $scope.banner = 'resources/banner.jpg';
-  $scope.textBackground = 'resources/zwartevilt.png';
-  $scope.background = 'resources/footer_lodyas.png';
-});
+controller('LandingCtrl', ['$scope', function($scope){
+  $scope.banner = 'img/banner.jpg';
+  $scope.textBackground = 'img/zwartevilt.png';
+  $scope.background = 'img/footer_lodyas.png';
+}]);
+
