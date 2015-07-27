@@ -9,6 +9,10 @@ angular.module('myApp.home', ['ngRoute'])
   });
 }])
 
-.controller('HomeCtrl', [function() {
-
+.controller('HomeCtrl', ['$scope', '$http', function($scope, $http) {
+  $http.get('/posts').success(function (data){
+    $scope.posts = data;
+  }).error(function() {
+    $scope.error = 'An error occurred loading posts'
+  });
 }]);
