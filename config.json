@@ -1,0 +1,3 @@
+{
+  "conString" : "postgres://www:delphi2006@localhost/blog"
+}

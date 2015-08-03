@@ -45,6 +45,9 @@ var filesToMove = ['app/index.html',
         'app/about/About.html',
         'app/contact/Contact.html',
         'app/home/Home.html',
+        'app/login/Login.html',
+        'app/signup/Signup.html',
+        'app/post/Post.html',
         'app/modernizr-2.8.3.min.js'];
 
 gulp.task('move', function(){

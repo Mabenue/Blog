@@ -1,14 +1,6 @@
 'use strict';
 
 angular.module('myApp.about', ['ngRoute'])
+    .controller('AboutCtrl', [function () {
 
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/about', {
-    templateUrl: 'about/About.html',
-    controller: 'AboutCtrl'
-  });
-}])
-
-.controller('AboutCtrl', [function() {
-
-}]);
+    }]);

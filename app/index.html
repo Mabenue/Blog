@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="css/vendor.css">
   <link rel="stylesheet" href="css/app.css">
   <script src="modernizr-2.8.3.min.js"></script>
+  <base href="/">
 </head>
 <body  ng-style="{'background-image':'url({{ background }})'}">
 <div class="navbar navbar-inverse navbar-fixed-top">
@@ -22,12 +23,16 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="#/home" class="navbar-brand">Alex Conway</a>
+            <a href="/" class="navbar-brand">Alex Conway</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="#/about">About</a></li>
-                <li><a href="#/contact">Contact</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/signup">Signup</a></li>
+                <li><a href="/login">Login</a></li>
             </ul>
         </div>
     </div>
