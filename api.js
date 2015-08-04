@@ -5,6 +5,7 @@ var express = require('express');
 var pg = require('pg');
 var passport = require('passport');
 var config = require('./config.json');
+var bcrypt = require('bcrypt');
 
 module.exports = (function(){
     'use strict';
@@ -67,6 +68,32 @@ module.exports = (function(){
                     res.status(200).send();
                 }
             });
+        });
+    });
+
+    api.post('/signup', function(req, res){
+        var username = req.body.signupUsername;
+        var password = req.body.signupPassword;
+
+        bcrypt.genSalt(10, function(err, salt){
+           bcrypt.hash(password, salt, function(err, hash){
+               console.log(req.body);
+               pg.connect(conString, function(err, client, done) {
+                   if (err) {
+                       return console.error('error fetching client from pool', err);
+                   }
+                   client.query('INSERT INTO "Users" ("Username", "Password") VALUES ($1, $2)'
+                       , [username, hash], function(err){
+                           done();
+                           if(err){
+                               res.status(500).send();
+                               return console.error('error running query', err);
+                           } else {
+                               res.status(200).send();
+                           }
+                       });
+               });
+           })
         });
     });
 

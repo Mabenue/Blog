@@ -21,7 +21,7 @@ passport.deserializeUser(function(user, done){
    done(null, user);
 });
 
-app.use(express.static(__dirname + '/build'));
+//app.use(express.static(__dirname + '/build'));
 app.use(morgan('dev'));                                         // log every request to the console
 app.use(bodyParser.urlencoded({'extended':'true'}));            // parse application/x-www-form-urlencoded
 app.use(bodyParser.json());                                     // parse application/json
@@ -32,7 +32,23 @@ app.use(session({ secret: 'super secret',
     saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+
+app.use("/js", express.static(__dirname + "/build/js"));
+app.use("/css", express.static(__dirname + "/build/css"));
+app.use("/img", express.static(__dirname + "/build/img"));
+app.use("/home", express.static(__dirname + "/build/home"));
+app.use("/about", express.static(__dirname + "/build/about"));
+app.use("/contact", express.static(__dirname + "/build/contact"));
+app.use("/login", express.static(__dirname + "/build/login"));
+app.use("/post", express.static(__dirname + "/build/post"));
+app.use("/signup", express.static(__dirname + "/build/signup"));
+
 app.use('/api', api);
+
+app.all("/*", function(req, res, next) {
+    res.sendfile("index.html", { root: __dirname + "/build" });
+});
 
 // listen (start app with node server.js) ======================================
 app.listen(8000);

@@ -47,12 +47,16 @@ var filesToMove = ['app/index.html',
         'app/home/Home.html',
         'app/login/Login.html',
         'app/signup/Signup.html',
-        'app/post/Post.html',
-        'app/modernizr-2.8.3.min.js'];
+        'app/post/Post.html'];
 
 gulp.task('move', function(){
     gulp.src(filesToMove, { base: 'app/'})
-        .pipe(gulp.dest('build'));
+        .pipe(gulp.dest('build'))
+});
+
+gulp.task('moveModernizr', function(){
+    gulp.src('app/modernizr-2.8.3.min.js')
+        .pipe(gulp.dest('build/js'))
 });
 
 gulp.task('clean', function(cb){
@@ -60,5 +64,5 @@ gulp.task('clean', function(cb){
 });
 
 gulp.task('default', ['clean'], function(){
-    gulp.start('vendorjs', 'vendorcss', 'scripts', 'css', 'move');
+    gulp.start('vendorjs', 'vendorcss', 'scripts', 'css', 'move', 'moveModernizr');
 });
