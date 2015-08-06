@@ -6,6 +6,8 @@ var pg = require('pg');
 var passport = require('passport');
 var config = require('./config.json');
 var bcrypt = require('bcrypt');
+var multipart = require('connect-multiparty');
+var multipartyMiddleware = multipart();
 
 module.exports = (function(){
     'use strict';
@@ -71,9 +73,15 @@ module.exports = (function(){
         });
     });
 
+    api.post('/attachment', multipartyMiddleware, function(req, res) {
+        console.log(req.body, req.files);
+        res.status(200).send();
+
+    });
+
     api.post('/signup', function(req, res){
-        var username = req.body.signupUsername;
-        var password = req.body.signupPassword;
+        var username = req.body.username;
+        var password = req.body.password;
 
         bcrypt.genSalt(10, function(err, salt){
            bcrypt.hash(password, salt, function(err, hash){

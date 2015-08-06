@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" ng-controller="LandingCtrl" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" ng-controller="LandingCtrl" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" ng-controller="LandingCtrl" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" ng-controller="LandingCtrl" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>My AngularJS App</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/css/vendor.css">
+  <link rel="stylesheet" href="/css/app.css">
+  <script src="/js/modernizr-2.8.3.min.js"></script>
+  <base href="/">
+</head>
+<body  ng-style="{'background-image':'url({{ background }})'}">
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">Alex Conway</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/signup">Signup</a></li>
+                <li><a href="/login">Login</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="jumbotron other-color" ng-style="{'background-image':'url({{ banner }})'}">
+    <h1 class="hit-the-floor text-center"></h1>
+    <h2 class="text-banner-color text-center" style="color: mediumspringgreen"></h2>
+</div>
+
+  <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+
+  <div ng-view></div>
+
+  <script src="/js/vendor.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

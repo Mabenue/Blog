@@ -12,15 +12,19 @@
     "angular-mocks": "~1.4.0",
     "html5-boilerplate": "~5.2.0",
     "bootstrap": "~3.3.5",
-    "jquery": "~2.1.4"
+    "jquery": "~2.1.4",
+    "ng-file-upload": "~6.0.3"
   },
   "overrides": {
-    "html5-boilerplate" : {
-      "main": ["dist/css/main.css",
-      "dist/css/normalize.css"]
+    "html5-boilerplate": {
+      "main": [
+        "dist/css/main.css",
+        "dist/css/normalize.css"
+      ]
     },
-    "bootstrap" : {
-      "main": "dist/css/bootstrap.css"
+    "bootstrap": {
+      "main": ["less/!(variables).less",
+        "dist/js/bootstrap.js"]
     },
     "ignore": [
       "**/.*",

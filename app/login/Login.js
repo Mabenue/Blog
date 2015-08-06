@@ -5,7 +5,10 @@
 
 angular.module('myApp.login', ['ngRoute'])
     .controller('LoginCtrl', ['$scope', '$http', function ($scope, $http) {
-        $scope.loginData = null;
+        $scope.loginData = {};
+        $scope.loginData.username = "";
+        $scope.loginData.password = "";
+
         $scope.login = function () {
             $http.post('/api/login', this.loginData).success(function (){
                 alert("Logged in Successfully");

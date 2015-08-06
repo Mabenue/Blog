@@ -5,10 +5,16 @@
 
 angular.module('myApp.signup', ['ngRoute'])
     .controller('SignupCtrl', ['$scope', '$http', function ($scope, $http) {
-        $scope.signupData = null;
+        $scope.signupModel = {};
+        $scope.signupModel.username = "";
+        $scope.signupModel.password = "";
+        $scope.signupModel.verify = "";
+
+
         $scope.signup = function () {
-            $http.post('/api/signup', this.signupData).success(function (data){
+            $http.post('/api/signup', this.signupModel).success(function () {
                 alert("Signed Up!");
             })
         }
+
     }]);
