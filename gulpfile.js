@@ -6,6 +6,7 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     concat = require('gulp-concat'),
     filter = require('gulp-filter'),
+    flatten  = require('gulp-flatten'),
     less = require('gulp-less'),
     mainBowerFiles = require('main-bower-files'),
     del = require('del');
@@ -74,19 +75,19 @@ gulp.task('vendorcss', function(){
 
 
 /** Move Files **/
-var filesToMove = ['app/index.html',
+var resources = ['app/index.html',
         'app/img/**/*.*',
-        'app/fonts/**/*.*',
-        'app/about/About.html',
-        'app/contact/Contact.html',
-        'app/home/Home.html',
-        'app/login/Login.html',
-        'app/signup/Signup.html',
-        'app/post/Post.html'];
+        'app/fonts/**/*.*'];
 
 gulp.task('move', function(){
-    gulp.src(filesToMove, { base: 'app/'})
+    gulp.src(resources, { base: 'app/'})
         .pipe(gulp.dest('build'))
+});
+
+gulp.task('partials', function(){
+    gulp.src(['app/**/*.html', '!app/index.html', '!app/vendor/**/*.html'])
+        .pipe(flatten())
+        .pipe(gulp.dest('build/partials'))
 });
 
 gulp.task('moveModernizr', function(){
@@ -100,9 +101,9 @@ gulp.task('clean', function(cb){
 
 /** Start Tasks **/
 gulp.task('default', ['clean'], function(){
-    gulp.start('vendorjs', 'vendorcss', 'scripts', 'css', 'move', 'moveModernizr');
+    gulp.start('vendorjs', 'vendorcss', 'scripts', 'css', 'move', 'partials', 'moveModernizr');
 });
 
 gulp.task('dev', ['clean'], function(){
-    gulp.start('vendorjsDev', 'vendorcss', 'scriptsDev', 'css', 'move', 'moveModernizr');
+    gulp.start('vendorjsDev', 'vendorcss', 'scriptsDev', 'css', 'partials', 'move', 'moveModernizr');
 });

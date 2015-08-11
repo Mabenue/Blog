@@ -9,6 +9,9 @@ angular.module('myApp.post', ['ngRoute'])
            $scope.upload($scope.files);
         });
 
+        $scope.postData = {};
+        $scope.postData.paths = [];
+
         $scope.upload = function (files){
             if(files){
                 for (var i = 0; i < files.length; i++){
@@ -18,17 +21,16 @@ angular.module('myApp.post', ['ngRoute'])
                       url: '/api/attachment',
                       fields: {},
                       file: file
-                    }).success(function(){
-                      alert("files submitted");
+                    }).success(function(data){
+                        $scope.postData.paths = data;
                     })
                 }
             }
         };
 
         $scope.newPost = function () {
-            $http.post('/api/posts', this.postData).success(function (data){
+            $http.post('/api/posts', this.postData).success(function (){
                 alert("Post Submitted");
-                $scope.posts.push(data);
             })
         }
     }]);

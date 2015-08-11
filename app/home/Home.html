@@ -1,5 +1,7 @@
 <div ng-repeat="post in posts" class="row top-buffer">
     <div class="container" ng-style="{'background-image':'url({{ textBackground }})'}">
+        <div ng-repeat="path in post.Paths"><img src="/{{path}}"> </div>
+
         <p>{{ post.Subject }}</p>
 
         <p>{{ post.Content }}</p>

@@ -6,8 +6,9 @@ var pg = require('pg');
 var passport = require('passport');
 var config = require('./config.json');
 var bcrypt = require('bcrypt');
+var fs = require('fs');
 var multipart = require('connect-multiparty');
-var multipartyMiddleware = multipart();
+var multipartyMiddleware = multipart({autoFiles: true, uploadDir: 'attachments/'});
 
 module.exports = (function(){
     'use strict';
@@ -42,7 +43,9 @@ module.exports = (function(){
             if (err) {
                 return console.error('error fetching client from pool', err);
             }
-            client.query('SELECT "PostID", "Subject", "Content" FROM "Posts"', function (err, result) {
+            client.query('SELECT "p"."PostID", "Subject", "Content", ARRAY["Path"] As "Paths" FROM "Posts" AS "p" ' +
+                'LEFT JOIN "Attachments" AS "a" ON "a"."PostID" = "p"."PostID" ORDER BY "PostID" DESC',
+                function (err, result) {
                 done();
                 if (err) {
                     return console.error('error running query', err);
@@ -54,28 +57,48 @@ module.exports = (function(){
 
     api.post('/posts', auth, function(req, res) {
         var subject = req.body.subject,
-            content = req.body.postContent;
+            content = req.body.postContent,
+            paths = [];
+        if (typeof req.body.paths === 'string'){
+            paths = [ req.body.paths ];
+        } else {
+            paths = req.body.paths;
+        }
 
         pg.connect(conString, function(err, client, done) {
             if(err){
                 return console.error('error fetching client from pool', err);
             }
-            client.query('INSERT INTO "Posts" ("Subject", "Content") VALUES ($1, $2)'
-                    , [subject, content], function(err){
+            client.query('INSERT INTO "Posts" ("Subject", "Content") VALUES ($1, $2) RETURNING "PostID"'
+                    , [subject, content], function(err, result){
                 done();
                 if(err){
                     res.status(500).send();
                     return console.error('error running query', err);
                 } else {
-                    res.status(200).send();
+                    if (paths != null) {
+                        for (var i = 0; i < paths.length; i++) {
+                            client.query('INSERT INTO "Attachments" ("PostID", "Path") VALUES ($1, $2)'
+                                , [result.rows[0].PostID, paths[i]], function (err) {
+                                    done();
+                                    if (err) {
+                                        res.status(500).send();
+                                        return console.error('error running query', err);
+                                    } else {
+                                        return res.status(200).send();
+                                    }
+                                })
+                        }
+                    }
+                    return res.status(200).send();
                 }
             });
         });
     });
 
-    api.post('/attachment', multipartyMiddleware, function(req, res) {
+    api.post('/attachment', auth, multipartyMiddleware, function(req, res) {
         console.log(req.body, req.files);
-        res.status(200).send();
+        res.status(200).send(req.files.file.path);
 
     });
 

@@ -30,6 +30,10 @@ var getAuthorization = function(username, password, callback){
                 if(err){
                     return console.error('error running query', err);
                 }
+                if (result.rows.length < 1) {
+                    callback(false);
+                    return;
+                }
                 var hash = result.rows[0].Password;
                 bcrypt.compare(password, hash, function(err, res) {
                     callback(res);

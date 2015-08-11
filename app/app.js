@@ -13,22 +13,22 @@ angular.module('myApp', [
 ]).
     config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
         $routeProvider.when('/', {
-            templateUrl: 'home/Home.html',
+            templateUrl: 'partials/Home.html',
             controller: 'HomeCtrl'
         }).when('/signup', {
-            templateUrl: 'signup/Signup.html',
+            templateUrl: 'partials/Signup.html',
             controller: 'SignupCtrl'
         }).when('/login', {
-            templateUrl: 'login/Login.html',
+            templateUrl: 'partials/Login.html',
             controller: 'LoginCtrl'
         }).when('/post', {
-            templateUrl: 'post/Post.html',
+            templateUrl: 'partials/Post.html',
             controller: 'PostCtrl'
         }).when('/contact', {
-            templateUrl: 'contact/Contact.html',
+            templateUrl: 'partials/Contact.html',
             controller: 'ContactCtrl'
         }).when('/about', {
-            templateUrl: 'about/About.html',
+            templateUrl: 'partials/About.html',
             controller: 'AboutCtrl'
         }).otherwise({redirectTo: '/home'});
         $locationProvider.html5Mode(true);

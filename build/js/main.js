@@ -13,22 +13,22 @@ angular.module('myApp', [
 ]).
     config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
         $routeProvider.when('/', {
-            templateUrl: 'home/Home.html',
+            templateUrl: 'partials/Home.html',
             controller: 'HomeCtrl'
         }).when('/signup', {
-            templateUrl: 'signup/Signup.html',
+            templateUrl: 'partials/Signup.html',
             controller: 'SignupCtrl'
         }).when('/login', {
-            templateUrl: 'login/Login.html',
+            templateUrl: 'partials/Login.html',
             controller: 'LoginCtrl'
         }).when('/post', {
-            templateUrl: 'post/Post.html',
+            templateUrl: 'partials/Post.html',
             controller: 'PostCtrl'
         }).when('/contact', {
-            templateUrl: 'contact/Contact.html',
+            templateUrl: 'partials/Contact.html',
             controller: 'ContactCtrl'
         }).when('/about', {
-            templateUrl: 'about/About.html',
+            templateUrl: 'partials/About.html',
             controller: 'AboutCtrl'
         }).otherwise({redirectTo: '/home'});
         $locationProvider.html5Mode(true);
@@ -75,14 +75,16 @@ angular.module('myApp.home', ['ngRoute'])
 'use strict';
 
 angular.module('myApp.login', ['ngRoute'])
-    .controller('LoginCtrl', ['$scope', '$http', function ($scope, $http) {
+    .controller('LoginCtrl', ['$scope', '$http', '$location' , function ($scope, $http, $location) {
         $scope.loginData = {};
         $scope.loginData.username = "";
         $scope.loginData.password = "";
 
         $scope.login = function () {
             $http.post('/api/login', this.loginData).success(function (){
-                alert("Logged in Successfully");
+                $location.path('/');
+            }).error(function(){
+                $location.path('/singup');
             })
         }
     }]);
@@ -97,6 +99,9 @@ angular.module('myApp.post', ['ngRoute'])
            $scope.upload($scope.files);
         });
 
+        $scope.postData = {};
+        $scope.postData.paths = [];
+
         $scope.upload = function (files){
             if(files){
                 for (var i = 0; i < files.length; i++){
@@ -106,17 +111,16 @@ angular.module('myApp.post', ['ngRoute'])
                       url: '/api/attachment',
                       fields: {},
                       file: file
-                    }).success(function(){
-                      alert("files submitted");
+                    }).success(function(data){
+                        $scope.postData.paths = data;
                     })
                 }
             }
         };
 
         $scope.newPost = function () {
-            $http.post('/api/posts', this.postData).success(function (data){
+            $http.post('/api/posts', this.postData).success(function (){
                 alert("Post Submitted");
-                $scope.posts.push(data);
             })
         }
     }]);
