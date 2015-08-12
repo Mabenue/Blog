@@ -37,6 +37,7 @@ app.use(passport.session());
 app.use("/js", express.static(__dirname + "/build/js"));
 app.use("/css", express.static(__dirname + "/build/css"));
 app.use("/img", express.static(__dirname + "/build/img"));
+app.use("/fonts", express.static(__dirname + "/build/fonts"));
 app.use("/attachments", express.static(__dirname + "/attachments"));
 app.use("/partials", express.static(__dirname + "/build/partials"));
 

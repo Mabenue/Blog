@@ -1,6 +1,6 @@
 <div ng-repeat="post in posts" class="row top-buffer">
     <div class="container" ng-style="{'background-image':'url({{ textBackground }})'}">
-        <div ng-repeat="path in post.Paths"><img src="/{{path}}"> </div>
+        <div ng-repeat="path in post.Paths"><img src="/{{path}}" class="img-responsive" alt="{{post.Subject}}"></div>
 
         <p>{{ post.Subject }}</p>
 
@@ -8,3 +8,4 @@
     </div>
 </div>
 <li ng-hide="loggedUser.name != 'admin'"><a href="/post">New Post</a></li>
+<span class="glyphicon glyphicon-play"></span>
