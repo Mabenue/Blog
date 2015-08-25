@@ -35,7 +35,7 @@ angular.module('myApp', [
         $locationProvider.hashPrefix('!');
     }]).
     controller('LandingCtrl', ['$scope', function ($scope) {
-        $scope.banner = 'img/banner.jpg';
+        $scope.banner = 'img/hexaglogo.svg'
         $scope.textBackground = 'img/zwartevilt.png';
         $scope.background = 'img/footer_lodyas.png';
     }]);

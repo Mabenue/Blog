@@ -38,3 +38,17 @@
 }
 
 .top-buffer { margin-top:5px; }
+
+.jumbotron {
+  background: url('../img/banner.jpg') no-repeat center center;
+  -webkit-background-size 100% 100%;
+  -moz-background-size: 100% 100%;
+  -o-background-size: 100% 100%;
+  background-size: 100% 100%;
+  height: 100%;
+}
+
+.push-spaces
+{
+   height: 1080px;
+}
