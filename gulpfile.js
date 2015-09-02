@@ -58,21 +58,26 @@ gulp.task('compileLess', ['moveLess'], function(){
         .pipe(gulp.dest('build/less'))
 });
 
-gulp.task('css', ['compileLess'], function() {
-    return gulp.src(['build/less/bootstrap.css', 'app/*.css', '!vendor', '!app/vendor/**'])
+gulp.task('css', function() {
+    return gulp.src([ 'app/*.css', '!vendor', '!app/vendor/**'])
         .pipe(concat('app.css'))
         .pipe(minifycss())
         .pipe(gulp.dest('build/css'));
 });
 
-gulp.task('vendorcss', function(){
+gulp.task('vendorcss', ['compileLess'], function(){
     return gulp.src(mainBowerFiles())
         .pipe(filter('*.css'))
         .pipe(concat('vendor.css'))
-        .pipe(minifycss())
         .pipe(gulp.dest('build/css'));
 });
 
+gulp.task('appendBootstrap', ['vendorcss'], function(){
+    return gulp.src(['build/css/vendor.css', 'build/less/bootstrap.css'])
+        .pipe(concat('vendor.css'))
+	.pipe(minifycss())
+        .pipe(gulp.dest('build/css'));
+});
 
 /** Move Files **/
 var resources = ['app/index.html',
@@ -101,9 +106,9 @@ gulp.task('clean', function(cb){
 
 /** Start Tasks **/
 gulp.task('default', ['clean'], function(){
-    gulp.start('vendorjs', 'vendorcss', 'scripts', 'css', 'move', 'partials', 'moveModernizr');
+    gulp.start('vendorjs', 'vendorcss', 'appendBootstrap', 'scripts', 'css', 'move', 'partials', 'moveModernizr');
 });
 
 gulp.task('dev', ['clean'], function(){
-    gulp.start('vendorjsDev', 'vendorcss', 'scriptsDev', 'css', 'partials', 'move', 'moveModernizr');
+    gulp.start('vendorjsDev', 'vendorcss', 'appendBootstrap', 'scriptsDev', 'css', 'partials', 'move', 'moveModernizr');
 });
