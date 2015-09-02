@@ -30,7 +30,7 @@ angular.module('myApp', [
         }).when('/about', {
             templateUrl: 'partials/About.html',
             controller: 'AboutCtrl'
-        }).otherwise({redirectTo: '/home'});
+        }).otherwise({redirectTo: '/'});
         $locationProvider.html5Mode(true);
         $locationProvider.hashPrefix('!');
     }]).

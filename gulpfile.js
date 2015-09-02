@@ -47,7 +47,7 @@ gulp.task('moveVendorLess', function(){
 });
 
 gulp.task('moveLess', ['moveVendorLess'], function(){
-    return gulp.src('app/less/bootstrap/variables.less')
+    return gulp.src('app/less/variables.less')
         .pipe(filter('*.less'))
         .pipe(gulp.dest('build/less'))
 });

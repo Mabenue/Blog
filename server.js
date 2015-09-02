@@ -33,7 +33,6 @@ app.use(session({ secret: 'super secret',
 app.use(passport.initialize());
 app.use(passport.session());
 
-
 app.use("/js", express.static(__dirname + "/build/js"));
 app.use("/css", express.static(__dirname + "/build/css"));
 app.use("/img", express.static(__dirname + "/build/img"));
